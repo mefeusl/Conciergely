@@ -81,7 +81,7 @@ Prices change, so check each provider's current pricing page before you commit. 
 Full step-by-step instructions are in **[SETUP.md](SETUP.md)**. The short version:
 
 ```bash
-git clone <this repo> && cd conciergely
+git clone https://github.com/mefeusl/Conciergely && cd conciergely
 python3 -m venv venv && . venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env      # fill in your own keys; never commit this file
