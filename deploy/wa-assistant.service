@@ -1,0 +1,31 @@
+[Unit]
+Description=WhatsApp executive assistant
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=wabot
+Group=wabot
+WorkingDirectory=/opt/wa-assistant
+# Exactly one worker: the queue workers and timers run inside this process.
+ExecStart=/opt/wa-assistant/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 1 --proxy-headers --forwarded-allow-ips=127.0.0.1
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/wa-assistant/data
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+LockPersonality=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target
